@@ -1,0 +1,21 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        .card
+            .card-body
+                h6.card-title Image: 
+                p.card-text
+                    img.rounded.img-thumbnail(src=`${product.image}`, style='width: 304px; height: 304px;')
+                h6.card-title Name: 
+                    span.card-text= product.name_product
+                h6.card-title Amount: 
+                    span.card-text= product.amount
+                h6.card-title Price: 
+                    span.card-text= product.price
+                h6.card-title Producer: 
+                    span.card-text= product.producer
+                a.btn.btn-primary.mr-3(href=`/products/update/${product.id}`) Update
+                form.mr-3(action=`/products/delete/${product.id}`, method="POST" style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+                a.btn.btn-primary(href='/products') Back

@@ -1,0 +1,36 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        h1 New Employee
+
+        if errors
+            each error in errors
+                .alert.alert-danger= error
+        form(action="/employees/create", method="POST")
+
+            .form-group
+                label(for="name") Name
+                input#name.form-control(type="text", name="name", value=values ? values.name : '')
+
+            .form-group
+                label(for="address") Address
+                input#address.form-control(type="text", name="address", value=values ? values.address : '')
+
+            .form-group
+                label(for="phone") Phone
+                input#phone.form-control(type="text", name="phone", value=values ? values.phone : '')
+
+            .form-group
+                label(for="regency") Regency
+                input#regency.form-control(type="text", name="regency", value=values ? values.regency : '')
+
+            .form-group
+                label(for="salary") Salary
+                input#salary.form-control(type="number", name="salary", value=values ? values.salary : '')
+
+            .form-group
+                label(for="age") Age
+                input#age.form-control(type="number", name="age", value=values ? values.age : '')
+
+            button.btn.btn-primary Create

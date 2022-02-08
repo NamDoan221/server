@@ -1,0 +1,21 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        .card
+            .card-body
+                h6.card-title Customer Avatar: 
+                p.card-text
+                    img.rounded.img-thumbnail(src=`${customer.avatar}`, style='width: 304px; height: 304px;')
+                h6.card-title Customer Phone: 
+                    span.card-text= customer.phone_number
+                h6.card-title Customer Name: 
+                    span.card-text= customer.customer_name
+                h6.card-title Customer Address: 
+                    span.card-text= customer.address
+                h6.card-title Customer Age: 
+                    span.card-text= customer.age
+                a.btn.btn-primary.mr-3(href=`/customers/update/${customer.id}`) Update
+                form.mr-3(action=`/customers/delete/${customer.id}`, method="POST" style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+                a.btn.btn-primary(href='/customers') Back

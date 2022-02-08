@@ -1,0 +1,22 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        .card
+            .card-body
+                h6.card-title Name: 
+                    span.card-text= employee.employee_name
+                h6.card-title Address: 
+                    span.card-text= employee.address
+                h6.card-title Phone: 
+                    span.card-text= employee.phone_number
+                h6.card-title Regency: 
+                    span.card-text= employee.regency
+                h6.card-title Salary: 
+                    span.card-text= employee.salary
+                h6.card-title Age: 
+                    span.card-text= employee.age
+                a.btn.btn-primary.mr-3(href=`/employees/update/${employee.id}`) Update
+                form.mr-3(action=`/employees/delete/${employee.id}`, method="POST" style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+                a.btn.btn-primary(href='/employees') Back

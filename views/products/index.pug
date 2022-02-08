@@ -1,0 +1,43 @@
+extends ../layouts/common.pug
+
+block content
+
+    h1 
+        span Products
+        a.btn.btn-primary.ml-3(href="/products/create") New Product
+
+    .d-flex.align-items-center
+        form.ml-auto(action="/products/search", method="GET", class="d-flex")
+            input(type="text", name="q", id="input", class="form-control", placeholder="Tìm kiếm theo tên khách hàng")
+            button(class="btn btn-primary ml-2") Search
+    table.table(style='border: 1px solid #eeee')
+        thead
+            tr
+                th Image
+                th Name
+                th Amount
+                th Price
+                th Producer
+                th Action
+        tbody
+            each product in products
+                tr
+                    td 
+                        img.rounded.img-thumbnail(src=`${product.image}`, style='width: 104px; height: 104px;')
+                    td= product.name_product
+                    td= product.amount
+                    td= product.price
+                    td= product.producer
+                    td
+                        a.btn.btn-primary.mr-2(href=`/products/${product._id}`) View
+                        span &nbsp;
+                        a.btn.btn-primary.mr-2(href=`/products/update/${product._id}`) Update
+                        span &nbsp;
+                        form(action=`/products/delete/${product._id}`, method="POST", style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+    script.
+        var input = document.getElementById("input");
+        input.addEventListener("change", ()=> {
+            sessionStorage.setItem("input_query", input.value);
+        });
+        input.value = sessionStorage.getItem("input_query");

@@ -1,0 +1,57 @@
+extends ./layouts/common.pug
+
+block content
+    .jumbotron.w-100.mb-5
+        h1.text-center Đồ nội thất mây tre đan Thiên Đường
+        p Cửa hàng đồ nội thất mây tre đan Thiên Đường là một hệ thống 
+            |đồ nội thất chuyên cung cấp các sản phẩm đồ thủ công mĩ nghệ, 
+            |đồ nội thất được sản xuất từ các vật liệu tự nhiên như: mây, tre, nứa,...
+            |Cửa hàng hiện tại đang phát triển trên toàn quốc bạn có thể mua hàng trực tiếp
+            |tại các chi nhánh của cửa hàng hoặc đặt hàng trực tuyến trên website của cửa hàng
+            |để được hộ trợ và giao hàng tận nơi.
+    #carouselExampleIndicators.carousel.slide(data-ride='carousel', style='height: 30rem')
+        ol.carousel-indicators
+            li.active(data-target='#carouselExampleIndicators', data-slide-to='0')
+            li(data-target='#carouselExampleIndicators', data-slide-to='1')
+            li(data-target='#carouselExampleIndicators', data-slide-to='2')
+            li(data-target='#carouselExampleIndicators', data-slide-to='3')
+            li(data-target='#carouselExampleIndicators', data-slide-to='4')
+            li(data-target='#carouselExampleIndicators', data-slide-to='5')
+            li(data-target='#carouselExampleIndicators', data-slide-to='6')
+            li(data-target='#carouselExampleIndicators', data-slide-to='7')
+        .carousel-inner
+            .carousel-item.active
+                img.d-block.w-100.h-100(src='https://sofahoanghuy.com/wp-content/uploads/2019/06/b1.jpg', alt='1 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://afamilycdn.com/zoom/640_400/150157425591193600/2020/8/10/batchava-15969970067621091176374-0-0-629-1006-crop-15969970127631188771060.jpg', alt='2 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://lh3.googleusercontent.com/proxy/maERWxzW3UQ5or2OPg4g7PokAnEC-fl7ogkEtX-2T4C3SCLQrs0qjVlCKp9FJDw6OG-M4VaC2rvva-yyF-R-kKjTfEZynKaZWTlE2VkwBc9HGFtNA41kb-SpU8SwJLyV8rXEmuWYkPBB', alt='3 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://product.hstatic.net/1000372003/product/ghe_may_sofa_2_c629f4190b8f49e7a8def164f442ee1c_1024x1024.jpg', alt='4 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://giadinh.mediacdn.vn/thumb_w/640/2017/photo-0-1489720966681.jpg', alt='5 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://media.bizwebmedia.net/Sites/11176/Data/images/dan-da-ma-sang-trong-voi-noi-that-may-tre-1%20(1).jpg', alt='6 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://gotrangtri.vn/wp-content/uploads/2018/12/do-may-tre-dan-14.jpg', alt='7 slide')
+            .carousel-item
+                img.d-block.w-100.h-100(src='https://afamilycdn.com/thumb_w/650/2017/img20170313085859125.png', alt='8 slide')
+        a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+            span.carousel-control-prev-icon(aria-hidden='true')
+            span.sr-only Previous
+        a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+            span.carousel-control-next-icon(aria-hidden='true')
+            span.sr-only Next
+    .jumbotron.w-100.mt-5(style='margin-bottom:0')
+        p Địa chỉ: Ngõ 82 Phố Duy Tân, Dịch Vọng Hậu, Cầu Giấy, Hà Nội.
+        p Điện thoại: 0968265814.
+        form
+            .form-group
+                label(for='exampleInputEmail1') Email address
+                input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email')
+            .form-group
+                label(for='exampleFormControlTextarea1') Content
+                textarea#exampleFormControlTextarea1.form-control(rows='3')
+
+            button.btn.btn-primary(type='submit') Contact with we
+

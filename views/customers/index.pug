@@ -1,0 +1,43 @@
+extends ../layouts/common.pug
+
+block content
+
+    h1 
+        span Customers
+        a.btn.btn-primary.ml-3(href="/customers/create") New Customer
+
+    .d-flex.align-items-center
+        form.ml-auto(action="/customers/search", method="GET", class="d-flex")
+            input(type="text", name="q", id="input", class="form-control", placeholder="Tìm kiếm theo tên khách hàng")
+            button(class="btn btn-primary ml-2") Search
+    table.table(style='border: 1px solid #eeee')
+        thead
+            tr
+                th Avatar
+                th Name
+                th Address
+                th Phone
+                th Age
+                th Action
+        tbody
+            each customer in customers
+                tr
+                    td 
+                        img.rounded.img-thumbnail(src=`${customer.avatar}`, style='width: 104px; height: 104px;')
+                    td= customer.customer_name
+                    td= customer.address
+                    td= customer.phone_number
+                    td= customer.age
+                    td
+                        a.btn.btn-primary.mr-2(href=`/customers/${customer._id}`) View
+                        span &nbsp;
+                        a.btn.btn-primary.mr-2(href=`/customers/update/${customer._id}`) Update
+                        span &nbsp;
+                        form(action=`/customers/delete/${customer._id}`, method="POST", style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+    script.
+        var input = document.getElementById("input");
+        input.addEventListener("change", ()=> {
+            sessionStorage.setItem("input_query", input.value);
+        });
+        input.value = sessionStorage.getItem("input_query");

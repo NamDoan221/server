@@ -1,0 +1,46 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        h1 Update Customer
+
+        if errors
+            each error in errors
+                .alert.alert-danger= error
+
+        form(action=`/customers/update/${customer._id}`, method="POST", enctype="multipart/form-data")
+
+            .form-group
+                label(for="avatar") Avatar
+                input#avatar.form-control(type="file", name="avatar", value=customer.avatar, onchange="previewFile()", accept="image/*")
+                img.rounded.img-thumbnail(src=`${customer.avatar}`, style='width: 104px; height: 104px;')
+            .form-group
+                label(for="name") Name
+                input#name.form-control(type="text", name="name", value=customer.customer_name)
+
+            .form-group
+                label(for="phone") Phone
+                input#phone.form-control(type="text", name="phone", value=customer.phone_number)
+
+            .form-group
+                label(for="address") Address
+                input#address.form-control(type="text", name="address", value=customer.address)
+
+            .form-group
+                label(for="age") Age
+                input#age.form-control(type="number", name="age", value=customer.age)
+
+            button.btn.btn-primary Update
+    script.
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        };

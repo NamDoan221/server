@@ -1,0 +1,24 @@
+html
+    head 
+        link(rel="stylesheet",href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+    body
+        .container.pt-5.mt-5.w-50
+            .jumbotron.w-100
+                h1 Sign Up
+                if errors
+                    each error in errors
+                        .alert.alert-danger= error
+                form(method="POST")
+                    .form-group
+                        label(for="email") Email
+                        input#email.form-control(type="text", name="email", value=values ? values.email : '')
+                    
+                    .form-group
+                        label(for="name") Name
+                        input#name.form-control(type="text", name="name", value=values ? values.name : '')
+
+                    .form-group
+                        label(for="password") Password
+                        input#password.form-control(type="password", name="password", value=values ? values.password : '')
+
+                    button.btn.btn-primary Sign Up

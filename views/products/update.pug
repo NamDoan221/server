@@ -1,0 +1,46 @@
+extends ../layouts/common.pug
+
+block content
+    .jumbotron.w-100
+        h1 Update Product
+
+        if errors
+            each error in errors
+                .alert.alert-danger= error
+
+        form(action=`/products/update/${product._id}`, method="POST", enctype="multipart/form-data")
+
+            .form-group
+                label(for="image") Image
+                input#image.form-control(type="file", name="image", value=product.image, onchange="previewFile()", accept="image/*")
+                img.rounded.img-thumbnail(src=`${product.image}`, style='width: 104px; height: 104px;')
+            .form-group
+                label(for="name") Name
+                input#name.form-control(type="text", name="name", value=product.name_product)
+
+            .form-group
+                label(for="amount") Amount
+                input#amount.form-control(type="number", name="amount", value=product.amount)
+
+            .form-group
+                label(for="price") Price
+                input#price.form-control(type="text", name="price", value=product.price)
+
+            .form-group
+                label(for="producer") Producer
+                input#producer.form-control(type="text", name="producer", value=product.producer)
+
+            button.btn.btn-primary Update
+    script.
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        };

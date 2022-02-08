@@ -1,0 +1,44 @@
+extends ../layouts/common.pug
+
+block content
+
+    h1 
+        span Employees
+        a.btn.btn-primary.ml-3(href="/employees/create") New Employee
+
+    .d-flex.align-items-center
+        form.ml-auto(action="/employees/search", method="GET", class="d-flex")
+            input(type="text", name="q", id="input", class="form-control", placeholder="Tìm kiếm theo tên nhân viên")
+            button(class="btn btn-primary ml-2") Search
+    table.table(style='border: 1px solid #eeee')
+        thead
+            tr
+                th Name
+                th Address
+                th Phone
+                th Regency
+                th Salary
+                th Age
+                th Action
+        tbody
+            each employee in employees
+                tr
+                    td= employee.employee_name
+                    td= employee.address
+                    td= employee.phone_number
+                    td= employee.regency
+                    td= employee.salary
+                    td= employee.age
+                    td
+                        a.btn.btn-primary.mr-2(href=`/employees/${employee._id}`) View
+                        span &nbsp;
+                        a.btn.btn-primary.mr-2(href=`/employees/update/${employee._id}`) Update
+                        span &nbsp;
+                        form(action=`/employees/delete/${employee._id}`, method="POST", style='margin-block-end: 0px; display: inline-block;')
+                            button.btn.btn-primary Delete
+    script.
+        var input = document.getElementById("input");
+        input.addEventListener("change", ()=> {
+            sessionStorage.setItem("input_query", input.value);
+        });
+        input.value = sessionStorage.getItem("input_query");

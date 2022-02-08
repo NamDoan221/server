@@ -1,0 +1,40 @@
+html
+    head 
+        link(rel="stylesheet",href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+        link(rel="stylesheet",href="/ShopApp/public/style/custom.css")
+    body
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+            a.navbar-brand(href='/') Thiên Đường
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+                #navbarSupportedContent.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+                li.nav-item
+                    a.nav-link(href='/employees') Employees
+                li.nav-item
+                    a.nav-link(href='/customers') Customers
+                li.nav-item
+                    a.nav-link(href='/products') Products
+                li.nav-item
+                    a.nav-link(href='/news') New
+                li.nav-item
+                    a.nav-link(href='/bills') Bills
+            if user
+                ul.navbar-nav.ml-auto.mr-5
+                    li.nav-item.dropdown
+                        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')= user.name
+                        .dropdown-menu(aria-labelledby='navbarDropdown')
+                            a.dropdown-item(href='/auth/logout') Logout
+            if !user
+                ul.navbar-nav.ml-auto.mr-5
+                    li.nav-item.dropdown
+                        a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Account
+                        .dropdown-menu(aria-labelledby='navbarDropdown')
+                            a.dropdown-item(href='/auth/login') Login
+                            a.dropdown-item(href='/auth/signup') Sign up
+
+        .container.pt-5.mt-5
+            block content
+        script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
