@@ -8,7 +8,8 @@ const OrderSchema = new mongoose.Schema({
   products: [{
     id: String,
     quantily: Number,
-    name: String
+    name: String,
+    image: String
   }]
 });
 mongoose.model('Order', OrderSchema);
