@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const Order = require('./model');
+const Cart = require('../cart/model');
 const verifyToken = require('../../../middleware/verify-token');
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -31,6 +32,9 @@ router.get('/', verifyToken, async (req, res) => {
 router.post('/', verifyToken, async (req, res) => {
   try {
     const order = await Order.create(req.body);
+    const cartFound = await Cart.find({ id_customer: req.body.id_customer });
+    const product = cartFound[0].products.filter(item => !req.body.products.find(ele => ele.id === item.id));
+    await Cart.findOneAndUpdate({ id_customer: req.body.id_customer }, { "$set": { products: product } }, { upsert: true, returnNewDocument: true });
     res.status(200).send({
       status: 200,
       data: order
