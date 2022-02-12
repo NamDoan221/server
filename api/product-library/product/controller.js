@@ -11,7 +11,7 @@ router.use(bodyParser.json());
 router.get('/', pagination, async (req, res) => {
   const searchQuery = {
     name: { $regex: req.query.search || '', $options: 'i' },
-    category: req.query.category
+    ...req.query
   };
   try {
     const products = await Product.find(searchQuery).skip(req.skip).limit(req.limit);

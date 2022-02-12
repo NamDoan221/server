@@ -87,7 +87,8 @@ router.post('/login', async (req, res) => {
       password: user.password,
       address: user.address,
       avatar: user.avatar,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      phone_number: user.phone_number
     }
     const token = jwt.sign(jwt_data, process.env.SECRET_TOKEN, {
       expiresIn: 86400
@@ -100,6 +101,48 @@ router.post('/login', async (req, res) => {
     });
   }
 
+});
+
+router.put('/change-pass', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.userId });
+    if (!user) {
+      return res.status(404).send({
+        status: 404,
+        message: 'User không tồn tại'
+      });
+    }
+    const passwordIsValid = bcrypt.compareSync(req.body.old_password, user.password);
+    if (!passwordIsValid) {
+      return res.status(401).send({
+        status: 401,
+        message: 'Mật khẩu không đúng'
+      });
+    }
+    if (req.body.old_password === req.body.new_password) {
+      return res.status(404).send({
+        status: 404,
+        message: 'Mật khẩu cũ và mật khẩu mới giống nhau'
+      });
+    }
+    const hashedPassword = bcrypt.hashSync(req.body.new_password, 8);
+    const userUpdate = await User.findOneAndUpdate({ _id: req.userId }, { $set: { password: hashedPassword } }, { sort: { name: 1 }, upsert: true, returnNewDocument: true });
+    if (!userUpdate) {
+      return res.status(404).send({
+        status: 404,
+        message: 'User không tồn tại'
+      });
+    }
+    res.status(200).send({
+      status: 200,
+      message: 'Thao tác thành công'
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: 500,
+      message: 'Có lỗi phát sinh trong server'
+    });
+  }
 });
 
 router.get('/logout', (req, res) => {

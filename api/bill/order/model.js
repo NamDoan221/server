@@ -10,7 +10,9 @@ const OrderSchema = new mongoose.Schema({
     quantily: Number,
     name: String,
     image: String
-  }]
+  }],
+  preparation_time: String,
+  delivery_time: String
 });
 mongoose.model('Order', OrderSchema);
 
